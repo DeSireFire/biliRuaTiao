@@ -31,13 +31,14 @@ python3+
 Win系统为尝试过。  
 ```
 
-3. 使用方法说明:
+3. 使用方法说明:  
 安装：
 ```bash
 git clone https://github.com/DeSireFire/easyBilibiliLive.git
 ```
 使用： （根据提示输入账号密码和操作选项即可）
 ```bash
+cd easyBilibiliLive
 python3 controlBLT.py
 ```
 
@@ -46,4 +47,11 @@ python3 controlBLT.py
 输入完B站账号密码，会生成一个配置文件 config.json 。  
 该文件的重要程度与密码等同，不要发送给别人，这上面有你B站账号的重要信息。  
 如果不需要它，请优先删除它。
+```
+
+5. 用户隐私信息说明:
+```bash
+本开源脚本不会窃取用户的任何用户名 密码 cookie等信息。   
+也没几行代码，又是开源的，我的脚本是没有这些行为的，一切信息都是存在 config.json 随时可删。
+但是 bilibili-live-tools 项目 在上个版本中,为了统计用户量,所有使用舰长亲密度领取功能的用户会向其的监控服务器发送一条带有自己账号uid的数据,这条数据仅用于统计用户数量。
 ```

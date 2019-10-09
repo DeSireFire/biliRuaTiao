@@ -219,6 +219,21 @@ def choiceHandler(c):
             with open(os.path.join(os.getcwd(), 'config.json'), 'w') as f:
                 json.dump(info, f)
             print('保存修改后的信息...ok')
+
+def printMenu(menuDict):
+    '''
+    菜单选项打印函数
+    :param menuDict:
+    :return:
+    '''
+    print('*' * 50)
+    for k, v in menuDict.items():
+        print('%s %s'%(k,v))
+    print('输入 对应选项前的数字 回车即可执行操作')
+    print('*' * 50)
+    c = input('那么，What can i do for you? Tell me:')
+    return c
+
 def menu():
     menuDict = {
         1:'一键启动所有DD抢辣条',
@@ -250,12 +265,9 @@ def menu():
 
 
     while True:
-        print('*'*50)
-        for i in menuDict:
-            print("%s:%s"%(i,menuDict[i]))
-        print('输入 对应选项前的数字 回车即可执行操作')
-        print('*'*50)
-        c = input('那么，What can i do for you? Tell me:')
+
+        c = printMenu(menuDict)
+
         try:
             c = int(c)
             if c not in menuDict.keys():
