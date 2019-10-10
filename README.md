@@ -1,12 +1,12 @@
 # easyBilibiliLive
 easyBilibiliLive,一个袖珍傻瓜式B站直播挂机小程序。
-
+真的袖珍！！
 ---
 *重要说明*  
 
-使用该控制脚本必须前置安装 docker、crontab、python3.*  
+使用该控制脚本必须前置安装 docker、crontab、python3.*  (说真的，除了docker,后面两者不少Linux系统都是自带的)
 该脚本依赖于[bilibili-live-tools](https://github.com/Dawnnnnnn/bilibili-live-tools)项目  
-感谢 Dawnnnnnn 大佬 开发了它。  
+感谢 Dawnnnnnn大佬以及各位神仙 联合开发了它。  
 
 提供支持&联系我&增加功能？ => [Open a new issue](https://github.com/Dawnnnnnn/bilibili-live-tools)
 
@@ -27,17 +27,20 @@ easyBilibiliLive,一个袖珍傻瓜式B站直播挂机小程序。
 2. 环境说明:
 ```bash
 python3+  
-目前仅在Ubuntu18.04上测试运行过，一般来说Linux系统都可以部署使用。  
-Win系统为尝试过。  
+Linux系统都可以部署使用,但是由于本开发者太穷，目前仅在Ubuntu18.04上测试运行过。如果你在其他Linux系统使用成功跟我报个喜。  
+Win系统未尝试过，但是只要能装上使用docker和crontab,就可以运行。 
 ```
 
 3. 使用方法说明:  
-安装：
 ```bash
+安装：(如果你已经是root用户不用加sudo。如果你已经装docker就不用运行第二句命令)
+sudo apt-get update
+sudo apt-get install docker.io
 git clone https://github.com/DeSireFire/easyBilibiliLive.git
 ```
-使用： （根据提示输入账号密码和操作选项即可）
 ```bash
+使用： （根据提示输入账号密码和操作选项即可）
+
 cd easyBilibiliLive
 python3 controlBLT.py
 ```
@@ -53,5 +56,8 @@ python3 controlBLT.py
 ```bash
 本开源脚本不会窃取用户的任何用户名 密码 cookie等信息。   
 也没几行代码，又是开源的，我的脚本是没有这些行为的，一切信息都是存在 config.json 随时可删。
+
 但是 bilibili-live-tools 项目 在上个版本中,为了统计用户量,所有使用舰长亲密度领取功能的用户会向其的监控服务器发送一条带有自己账号uid的数据,这条数据仅用于统计用户数量。
+
+这与我无关。
 ```

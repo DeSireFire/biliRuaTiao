@@ -276,7 +276,7 @@ def menu():
         except:
             print('输入有误！')
 
-    if c in [1,2,3,4,5,6,7]:    # 是否退出
+    if c in [1,2,3,4,5,6,7,8]:    # 是否退出
         print('%s %s Start!' % (c, menuDict[c]))
         choiceHandler(c)
     else:
