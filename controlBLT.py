@@ -3,21 +3,10 @@
 # @FileName: controlBLT.py
 # @Software: PyCharm
 
-import os,json
+from tools import *
 
 ## 工具函数
-def cmdRuner(comm,readList=False):
-    '''
-    命令执行函数
-    :param comm:需要运行的命令
-    :param readList:返回结果控制，为真时 return 结果为列表类型，为假时为字符串类型
-    :return: 执行命令后翻回的结果
-    '''
-    result = os.popen(comm)
-    if readList:
-        return result.readlines()
-    else:
-        return result.read()
+
 
 def getDockerName():
     # 获取docker 容器的名字
@@ -82,10 +71,12 @@ def crontabFile(commList,startFile=False):
         filename = os.path.join(os.getcwd(), 'ddStopcron')  # 否~
 
     commList +=temp # 合并新旧定时任务
+    commList = list(set(commList))  # 去重
     # 文件存则覆盖，不存则创建
     with open(filename,'w') as f:
         for line in commList:
-            f.write(line+'\n')
+            if line:    # 如果不为空则写入
+                f.write(line+'\n')
 
     # 检查文件是否修改成功
     import time
@@ -219,20 +210,6 @@ def choiceHandler(c):
             with open(os.path.join(os.getcwd(), 'config.json'), 'w') as f:
                 json.dump(info, f)
             print('保存修改后的信息...ok')
-
-def printMenu(menuDict):
-    '''
-    菜单选项打印函数
-    :param menuDict:
-    :return:
-    '''
-    print('*' * 50)
-    for k, v in menuDict.items():
-        print('%s %s'%(k,v))
-    print('输入 对应选项前的数字 回车即可执行操作')
-    print('*' * 50)
-    c = input('那么，What can i do for you? Tell me:')
-    return c
 
 def menu():
     menuDict = {
