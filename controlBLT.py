@@ -3,40 +3,10 @@
 # @FileName: controlBLT.py
 # @Software: PyCharm
 
-from tools import *
+
+from sub import *
 
 ## 工具函数
-
-
-def getDockerName():
-    # 获取docker 容器的名字
-    res = cmdRuner(r"docker ps --format '{{.ID}}\t{{.Image}}\t{{.Names}}'")
-    temp = {}
-    if res:
-        for line in res.splitlines():
-            if 'zsnmwy/bilibili-live-tools' in line:
-                temp[line.split()[2]] = line.split()[0]
-    return temp
-
-def runBTL(userName,userPW,dockerName,Backstage=True):
-    '''
-    BTL启动器
-    :param userName: B站登陆名
-    :param userPW: B站用户密码
-    :param Backstage: 是否后台运行，默认后台运行
-    :return: 返回整理的docker命令
-    '''
-
-    # 去除特殊字符，只保留汉字，字母、数字
-    import re
-    sub_str = re.sub(u"([^\u0030-\u0039\u0041-\u005a\u0061-\u007a])", "", dockerName)
-
-    if Backstage:   # 是否后台运行
-        comm = "docker run --name='{dockerName}' -itd --rm -e USER_NAME={userName} -e USER_PASSWORD={userPW} zsnmwy/bilibili-live-tools".format(dockerName=sub_str,userName=userName,userPW=userPW)
-    else:
-        comm = "docker run --name='{dockerName}' -it --rm -e USER_NAME={userName} -e USER_PASSWORD={userPW} zsnmwy/bilibili-live-tools".format(dockerName=sub_str,userName=userName,userPW=userPW)
-
-    return comm
 
 def crontabADD(crMins='*',crHours='*',crDays='*',crMouDays='*',crWeeks='*',yourComm='pwd'):
     '''
@@ -69,14 +39,14 @@ def crontabFile(commList,startFile=False):
         filename = os.path.join(os.getcwd(),'ddStartcron')  # 是~
     else:
         filename = os.path.join(os.getcwd(), 'ddStopcron')  # 否~
-
     commList +=temp # 合并新旧定时任务
     commList = list(set(commList))  # 去重
+    print(commList)
     # 文件存则覆盖，不存则创建
     with open(filename,'w') as f:
         for line in commList:
-            if line:    # 如果不为空则写入
-                f.write(line+'\n')
+            if line and line != '\n':    # 如果不为空则写入
+                f.write(line)
 
     # 检查文件是否修改成功
     import time
@@ -90,32 +60,13 @@ def crontabFile(commList,startFile=False):
 def choiceHandler(c):
     import os
     if c == 1:
-        with open(os.path.join(os.getcwd(),'config.json'), 'r') as f:
-            info = json.load(fp=f)
-        for user in info:   # 遍历多个用户
-            for psN in range(0,info[user][1]):  # 用户多开次数
-                dockerComm = runBTL(user, info[user][0],user+'DDScriptNum%s'%psN)  # 构造启动docker命令
-                dockerID = cmdRuner(dockerComm)[:12]
-                print("账号：%s 第%s线程启动成功！ID:%s"%(user,psN+1,dockerID))
-
+        run_docker()
 
     elif c == 2:
-        idList = getDockerName()  # 获取所有有关DD抢辣条的docker进程ID
-        for idKey in idList: # 遍历id 逐一关闭。时间较长
-            comm = 'docker stop {CONTAINER_Name}'.format(CONTAINER_Name=idKey)
-            print('正在关闭 %s ...'%(idKey))
-            print('关闭进度: [{down}/{len}]'.format(
-                list(idList.keys()).index(idKey)/len(idList.keys()),
-                down=list(idList.keys()).index(idKey),
-                len=len(idList.keys()),
-            ))
-            cmdRuner(comm)
-        print('全部关闭完成！')
+        stop_docker()
 
     elif c == 3:
-        # 格式化打印docker ps
-        print(cmdRuner(r"docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}'"))
-
+        print_docker_ps()
 
     elif c == 4:
         idList = getDockerName()  # 获取所有有关DD抢辣条的docker进程名称
