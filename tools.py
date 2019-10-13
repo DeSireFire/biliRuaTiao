@@ -24,6 +24,11 @@ def cmdRuner(comm,readList=False):
     :return: 执行命令后翻回的结果
     '''
     result = os.popen(comm)
+
+    # 判断是否权限运行命令：
+    if 'permission denied' in result.read():
+        result = os.popen('sudo '+comm) # 没权限则添加sudo
+
     if readList:
         return result.readlines()
     else:
