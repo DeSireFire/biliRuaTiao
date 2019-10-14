@@ -10,8 +10,9 @@ easyBilibiliLive,一个袖珍傻瓜式B站直播挂机小程序。
 
 提供支持&联系我&增加功能？ => [Open a new issue](https://github.com/Dawnnnnnn/bilibili-live-tools)
 
-建议在root用户运行脚本，
-如果是非root用户，请自行解决可能出现的运行权限问题。（是docker需要权限，不是我脚本要你的权限）
+建议在root用户运行脚本，   
+如果是非root用户，请自行解决可能出现的运行权限问题。   
+（是docker需要权限，不是我脚本要你的权限）  
 一般来说在Ubuntu系统，在运行命令前加 "sudo"即可 
 
 ---

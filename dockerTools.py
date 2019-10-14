@@ -1,4 +1,10 @@
 # coding=utf8
+# @Time    : 2019/10/14 0:44
+# @project: easyBilibiliLive.py
+# @FileName: cronTools.py
+# @Software: PyCharm
+
+# docker 操作函数
 from tools import *
 def runBTL(userName,userPW,dockerName,Backstage=True):
     '''
