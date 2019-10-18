@@ -3,9 +3,10 @@
 # @project: easyBilibiliLive.py
 # @FileName: cronTools.py
 # @Software: PyCharm
-# from tools import *
 
 # 次级操作函数
+
+# from tools import *
 
 from dockerTools import *
 from cronTools import *
@@ -42,7 +43,7 @@ def add_crontab_to_start():
     if not idList:
         print('没有发现在运行DD程序，请先启动再设置定时任务！')
         return
-
+    import os
     with open(os.path.join(os.getcwd(), 'config.json'), 'r') as f:
         info = json.load(fp=f)
 
