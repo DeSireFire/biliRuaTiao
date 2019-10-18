@@ -27,7 +27,7 @@ def crontabFile(commList,startFile=False):
     # 读取crontab
     temp = cmdRuner('crontab -l',True)
     for ft in temp: # 筛选出宿主机原自带的crontab任务，添加到命令列表，避免执行crontab -r时是把无关的任务清除
-        if 'DDScriptNum' not in ft:
+        if 'zsnmwy/bilibili-live-tools' not in ft:
             commList.append(ft)
 
     # 生成新的crontab定时任务文件
@@ -36,14 +36,16 @@ def crontabFile(commList,startFile=False):
         filename = os.path.join(os.getcwd(),'ddStartcron')  # 是~
     else:
         filename = os.path.join(os.getcwd(), 'ddStopcron')  # 否~
+
     commList +=temp # 合并新旧定时任务
-    commList = list(set(commList))  # 去重
-    print(commList)
+    commRes = [x.strip() for x in commList if x.strip()!='']    # 去除空\n
+
+    commRes = list(set(commRes))  # 去重
     # 文件存则覆盖，不存则创建
     with open(filename,'w') as f:
-        for line in commList:
-            if line and line != '\n':    # 如果不为空则写入
-                f.write(line)
+        for line in commRes:
+            if line:    # 如果不为空则写入
+                f.write(line+'\n')
 
     # 检查文件是否修改成功
     import time

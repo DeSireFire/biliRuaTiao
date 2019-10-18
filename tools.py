@@ -23,13 +23,14 @@ def cmdRuner(comm,readList=False):
     :param readList:返回结果控制，为真时 return 结果为列表类型，为假时为字符串类型
     :return: 执行命令后翻回的结果
     '''
-    result = os.popen(comm)
+    try:
+        result = os.popen('sudo ' + comm)
+        if readList:
+            return result.readlines()
+        else:
+            return result.read()
+    except Exception as e:
+        print(e)
+        return None
 
-    # 判断是否权限运行命令：
-    if 'permission denied' in result.read():
-        result = os.popen('sudo '+comm) # 没权限则添加sudo
 
-    if readList:
-        return result.readlines()
-    else:
-        return result.read()
