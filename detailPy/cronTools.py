@@ -3,7 +3,7 @@
 # @project: easyBilibiliLive.py
 # @FileName: cronTools.py
 # @Software: PyCharm
-from tools import *
+from .tools import *
 
 def crontabADD(crMins='*',crHours='*',crDays='*',crMouDays='*',crWeeks='*',yourComm='pwd'):
     '''

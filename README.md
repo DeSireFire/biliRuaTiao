@@ -47,7 +47,7 @@ git clone https://github.com/DeSireFire/easyBilibiliLive.git
 使用： （根据提示输入账号密码和操作选项即可）
 
 cd easyBilibiliLive
-python3 controlBLT.py
+python3 main.py
 
 推荐的功能流程是： 1、4、5  
 1 开启抢辣条进程
@@ -55,7 +55,7 @@ python3 controlBLT.py
 5 添加自动关闭的定时任务
 ```
 *重要提醒*  
-如果只启动抢辣条进程 不 设置 定时 开 关 任务，你B站账号两天后 非常大几率 被关进直播抢辣条的小黑屋。
+> 如果只启动抢辣条进程 不 设置 定时 开 关 任务，你B站账号两天后 非常大几率 被关进直播抢辣条的小黑屋。
 
 
 4. 配置文件说明:

@@ -4,7 +4,7 @@
 # @Software: PyCharm
 
 
-from sub import *
+from detailPy.sub import *
 
 ## 工具函数
 
@@ -115,7 +115,7 @@ def menu():
         with open(os.path.join(os.getcwd(),'config.json'), 'w') as f:
             info = {user:[pwd, psNum]}
             json.dump(info, f)
-        print('操作完毕，再如输入一次 python3 controlBLT.py 运行我吧？')
+        print('操作完毕，再如输入一次 python3 main.py 运行我吧？')
         return
 
 

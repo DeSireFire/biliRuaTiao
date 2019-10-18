@@ -8,8 +8,8 @@
 
 # from tools import *
 
-from dockerTools import *
-from cronTools import *
+from .dockerTools import *
+from .cronTools import *
 
 def run_docker():
     with open(os.path.join(os.getcwd(), 'config.json'), 'r') as f:
