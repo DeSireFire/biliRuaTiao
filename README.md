@@ -1,4 +1,6 @@
-# easyBilibiliLive
+# easyBilibiliLive 
+# (由于依赖项目可能存在问题，该项目暂时停止更新，不建议使用)
+# 有空再回来继续填坑
 easyBilibiliLive,一个袖珍傻瓜式B站直播挂机小程序。
 真的袖珍！！
 ---
