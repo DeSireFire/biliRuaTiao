@@ -1,11 +1,14 @@
 # coding=utf8
-# @Time    : 2019/10/14 0:44
-# @project: easyBilibiliLive.py
-# @FileName: cronTools.py
+# -*- coding: utf-8 -*-
+# @Time    : 2020/5/4 19:38
+# @Author  : RaXianch
+# @project: biliRuaTiao.py
+# @FileName: dockerTools.py
 # @Software: PyCharm
+# @github    ：https://github.com/DeSireFire
+import os
 
 # docker 操作函数
-from .tools import *
 def runBTL(userName,userPW,dockerName,Backstage=True):
     '''
     BTL启动器
@@ -26,7 +29,6 @@ def runBTL(userName,userPW,dockerName,Backstage=True):
 
     return comm
 
-
 def getDockerName():
     # 获取docker 容器的名字
     res = cmdRuner(r"docker ps --format '{{.ID}}\t{{.Image}}\t{{.Names}}'")
@@ -36,3 +38,20 @@ def getDockerName():
             if 'zsnmwy/bilibili-live-tools' in line:
                 temp[line.split()[2]] = line.split()[0]
     return temp
+
+def cmdRuner(comm,readList=False):
+    '''
+    命令执行函数
+    :param comm:需要运行的命令
+    :param readList:返回结果控制，为真时 return 结果为列表类型，为假时为字符串类型
+    :return: 执行命令后翻回的结果
+    '''
+    try:
+        result = os.popen('sudo ' + comm)
+        if readList:
+            return result.readlines()
+        else:
+            return result.read()
+    except Exception as e:
+        print(e)
+        return None
